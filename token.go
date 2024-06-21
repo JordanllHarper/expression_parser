@@ -6,9 +6,13 @@ import (
 	"unicode"
 )
 
-type integer_token struct{ int }
 type add_operator_token struct{}
 type subtract_operator_token struct{}
+
+type multiply_operator_token struct{}
+type divide_operator_token struct{}
+
+type integer_token struct{ int }
 type token interface{}
 
 func integer_or_error(index int, runes []rune) (token, int, error) {
@@ -40,6 +44,12 @@ func operator_or_error(character rune) (token, error) {
 
 	case '-':
 		return subtract_operator_token{}, nil
+
+	case '*':
+		return multiply_operator_token{}, nil
+
+	case '/':
+		return divide_operator_token{}, nil
 	}
 
 	return 0, errors.New("Not an operator")
