@@ -6,10 +6,10 @@ import (
 
 func TestTokenizingASingleNum(t *testing.T) {
 	data := "2"
-	want := integer_token{2}
+	want := IntegerToken{2}
 	actual := Tokenize(data)
 
-	if _, ok := actual[0].(integer_token); !ok {
+	if _, ok := actual[0].(IntegerToken); !ok {
 		t.Fatal("Token was not an integer token")
 	}
 
@@ -21,10 +21,10 @@ func TestTokenizingASingleNum(t *testing.T) {
 
 func TestTokenizingAMultiDigit(t *testing.T) {
 	data := "222"
-	want := integer_token{222}
+	want := IntegerToken{222}
 	actual := Tokenize(data)
 
-	if _, ok := actual[0].(integer_token); !ok {
+	if _, ok := actual[0].(IntegerToken); !ok {
 		t.Fatal("Token was not an integer token")
 	}
 
@@ -45,7 +45,7 @@ func TestTokenizingASingleOperator(t *testing.T) {
 
 func TestTokenizingBasicAddition(t *testing.T) {
 	data := "2 + 2"
-	expected := []token{integer_token{2}, AddOperatorToken{}, integer_token{2}}
+	expected := []token{IntegerToken{2}, AddOperatorToken{}, IntegerToken{2}}
 	actual := Tokenize(data)
 
 	for i := 0; i < len(expected); i++ {
@@ -58,7 +58,7 @@ func TestTokenizingBasicAddition(t *testing.T) {
 
 func TestTokenizingBasicSubtraction(t *testing.T) {
 	data := "2 - 2"
-	expected := []token{integer_token{2}, SubtractOperatorToken{}, integer_token{2}}
+	expected := []token{IntegerToken{2}, SubtractOperatorToken{}, IntegerToken{2}}
 	actual := Tokenize(data)
 
 	for i := 0; i < len(expected); i++ {

@@ -8,7 +8,7 @@ func main() {
 	my_expression := "22 + 222 + 22222 - 3"
 	tokens := Tokenize(my_expression)
 	for _, token := range tokens {
-		v, ok := token.(integer_token)
+		v, ok := token.(IntegerToken)
 		if ok {
 			println(v.int)
 		}

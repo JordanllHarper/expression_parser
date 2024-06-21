@@ -6,16 +6,24 @@ import (
 	"unicode"
 )
 
+// Token types
 type AddOperatorToken struct{}
+
 type SubtractOperatorToken struct{}
 
 type MultiplyOperatorToken struct{}
+
 type DivideOperatorToken struct{}
 
 type ParenOpeningToken struct{}
+
 type ParenClosingToken struct{}
 
-type integer_token struct{ int }
+type IntegerToken struct{ int }
+
+//
+
+// Base token
 type token interface{}
 
 func integer_or_error(index int, runes []rune) (token, int, error) {
@@ -36,7 +44,7 @@ func integer_or_error(index int, runes []rune) (token, int, error) {
 	if err != nil {
 		return nil, index, err
 	}
-	return integer_token{parsed_int}, index, nil
+	return IntegerToken{parsed_int}, index, nil
 }
 func parenthesis_or_error(character rune) (token, error) {
 	switch character {
