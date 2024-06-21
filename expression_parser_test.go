@@ -67,3 +67,39 @@ func TestTokenizingBasicSubtraction(t *testing.T) {
 		}
 	}
 }
+
+func TestTokenizingBasicMultiplication(t *testing.T) {
+	data := "2 * 2"
+	expected := []token{IntegerToken{2}, MultiplyOperatorToken{}, IntegerToken{2}}
+	actual := Tokenize(data)
+
+	for i := 0; i < len(expected); i++ {
+		if expected[i] != actual[i] {
+			t.Fatal("Tokens did not match")
+		}
+	}
+}
+
+func TestTokenizingBasicDivision(t *testing.T) {
+	data := "2 / 2"
+	expected := []token{IntegerToken{2}, DivideOperatorToken{}, IntegerToken{2}}
+	actual := Tokenize(data)
+
+	for i := 0; i < len(expected); i++ {
+		if expected[i] != actual[i] {
+			t.Fatal("Tokens did not match")
+		}
+	}
+}
+
+func TestTokenizingBasicDivisionWithParenthesis(t *testing.T) {
+	data := "(2 / 2)"
+	expected := []token{ParenOpeningToken{}, IntegerToken{2}, DivideOperatorToken{}, IntegerToken{2}, ParenClosingToken{}}
+	actual := Tokenize(data)
+
+	for i := 0; i < len(expected); i++ {
+		if expected[i] != actual[i] {
+			t.Fatal("Tokens did not match")
+		}
+	}
+}

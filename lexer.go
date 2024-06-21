@@ -1,10 +1,13 @@
 package expressionparser
 
+import "fmt"
+
 func Tokenize(raw_expression string) []token {
 	runes := []rune(raw_expression)
 	tokens := []token{}
 
-	for i := 0; i < len(raw_expression); i++ {
+	for i := 0; i < len(runes); {
+		fmt.Printf("Current character: %c\n", runes[i])
 		token, new_index, err := integer_or_error(i, runes)
 		if err == nil {
 			tokens = append(tokens, token)
@@ -21,6 +24,7 @@ func Tokenize(raw_expression string) []token {
 		if err == nil {
 			tokens = append(tokens, token)
 		}
+		i++
 	}
 	return tokens
 }

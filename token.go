@@ -50,7 +50,6 @@ func parenthesis_or_error(character rune) (token, error) {
 	switch character {
 	case '(':
 		return ParenOpeningToken{}, nil
-
 	case ')':
 		return ParenClosingToken{}, nil
 
