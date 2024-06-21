@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestExpressingASingleNum(t *testing.T) {
+func TestTokenizingASingleNum(t *testing.T) {
 	data := "2"
 	want := integer_token{2}
 	actual := Tokenize(data)
@@ -19,7 +19,22 @@ func TestExpressingASingleNum(t *testing.T) {
 	}
 }
 
-func TestExpressingASingleOperator(t *testing.T) {
+func TestTokenizingAMultiDigit(t *testing.T) {
+	data := "222"
+	want := integer_token{222}
+	actual := Tokenize(data)
+
+	if _, ok := actual[0].(integer_token); !ok {
+		t.Fatal("Token was not an integer token")
+	}
+
+	if want != actual[0] {
+		t.Fatal("Wanted token != actual token")
+
+	}
+}
+
+func TestTokenizingASingleOperator(t *testing.T) {
 	data := "+"
 	actual := Tokenize(data)
 
@@ -28,7 +43,7 @@ func TestExpressingASingleOperator(t *testing.T) {
 	}
 }
 
-func TestExpressingBasicAddition(t *testing.T) {
+func TestTokenizingBasicAddition(t *testing.T) {
 	data := "2 + 2"
 	expected := []token{integer_token{2}, add_operator_token{}, integer_token{2}}
 	actual := Tokenize(data)
@@ -41,7 +56,7 @@ func TestExpressingBasicAddition(t *testing.T) {
 
 }
 
-func TestExpressingBasicSubtraction(t *testing.T) {
+func TestTokenizingBasicSubtraction(t *testing.T) {
 	data := "2 - 2"
 	expected := []token{integer_token{2}, subtract_operator_token{}, integer_token{2}}
 	actual := Tokenize(data)
