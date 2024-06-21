@@ -20,7 +20,7 @@ func integer_or_error(index int, runes []rune) (token, int, error) {
 	for unicode.IsDigit(runes[index]) {
 		integer_accumulator = append(integer_accumulator, runes[index])
 		index += 1
-		if index > len(runes)-1 {
+		if OutOfRange(runes, index) {
 			break
 		}
 	}
