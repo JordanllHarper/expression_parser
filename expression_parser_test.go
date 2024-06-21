@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestTokenizingASingleNum(t *testing.T) {
+func TestExpressingASingleNum(t *testing.T) {
 	data := "2"
 	want := integer_token{2}
 	actual := Tokenize(data)
@@ -19,7 +19,7 @@ func TestTokenizingASingleNum(t *testing.T) {
 	}
 }
 
-func TestTokenizingASingleOperator(t *testing.T) {
+func TestExpressingASingleOperator(t *testing.T) {
 	data := "+"
 	actual := Tokenize(data)
 
@@ -28,7 +28,7 @@ func TestTokenizingASingleOperator(t *testing.T) {
 	}
 }
 
-func TestTokenizingBasicAddition(t *testing.T) {
+func TestExpressingBasicAddition(t *testing.T) {
 	data := "2 + 2"
 	expected := []token{integer_token{2}, add_operator_token{}, integer_token{2}}
 	actual := Tokenize(data)
@@ -41,7 +41,7 @@ func TestTokenizingBasicAddition(t *testing.T) {
 
 }
 
-func TestTokenizingBasicSubtraction(t *testing.T) {
+func TestExpressingBasicSubtraction(t *testing.T) {
 	data := "2 - 2"
 	expected := []token{integer_token{2}, subtract_operator_token{}, integer_token{2}}
 	actual := Tokenize(data)
