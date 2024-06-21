@@ -16,6 +16,11 @@ func Tokenize(raw_expression string) []token {
 		if err == nil {
 			tokens = append(tokens, token)
 		}
+
+		token, err = parenthesis_or_error(runes[i])
+		if err == nil {
+			tokens = append(tokens, token)
+		}
 	}
 	return tokens
 }

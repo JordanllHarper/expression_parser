@@ -6,11 +6,14 @@ import (
 	"unicode"
 )
 
-type add_operator_token struct{}
-type subtract_operator_token struct{}
+type AddOperatorToken struct{}
+type SubtractOperatorToken struct{}
 
-type multiply_operator_token struct{}
-type divide_operator_token struct{}
+type MultiplyOperatorToken struct{}
+type DivideOperatorToken struct{}
+
+type ParenOpeningToken struct{}
+type ParenClosingToken struct{}
 
 type integer_token struct{ int }
 type token interface{}
@@ -34,22 +37,33 @@ func integer_or_error(index int, runes []rune) (token, int, error) {
 		return nil, index, err
 	}
 	return integer_token{parsed_int}, index, nil
+}
+func parenthesis_or_error(character rune) (token, error) {
+	switch character {
+	case '(':
+		return ParenOpeningToken{}, nil
+
+	case ')':
+		return ParenClosingToken{}, nil
+
+	}
+	return nil, errors.New("Not a parenthesis")
 
 }
 func operator_or_error(character rune) (token, error) {
 
 	switch character {
 	case '+':
-		return add_operator_token{}, nil
+		return AddOperatorToken{}, nil
 
 	case '-':
-		return subtract_operator_token{}, nil
+		return SubtractOperatorToken{}, nil
 
 	case '*':
-		return multiply_operator_token{}, nil
+		return MultiplyOperatorToken{}, nil
 
 	case '/':
-		return divide_operator_token{}, nil
+		return DivideOperatorToken{}, nil
 	}
 
 	return 0, errors.New("Not an operator")

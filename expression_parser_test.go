@@ -38,14 +38,14 @@ func TestTokenizingASingleOperator(t *testing.T) {
 	data := "+"
 	actual := Tokenize(data)
 
-	if _, ok := actual[0].(add_operator_token); !ok {
+	if _, ok := actual[0].(AddOperatorToken); !ok {
 		t.Fatal("Token was not an addition token")
 	}
 }
 
 func TestTokenizingBasicAddition(t *testing.T) {
 	data := "2 + 2"
-	expected := []token{integer_token{2}, add_operator_token{}, integer_token{2}}
+	expected := []token{integer_token{2}, AddOperatorToken{}, integer_token{2}}
 	actual := Tokenize(data)
 
 	for i := 0; i < len(expected); i++ {
@@ -58,7 +58,7 @@ func TestTokenizingBasicAddition(t *testing.T) {
 
 func TestTokenizingBasicSubtraction(t *testing.T) {
 	data := "2 - 2"
-	expected := []token{integer_token{2}, subtract_operator_token{}, integer_token{2}}
+	expected := []token{integer_token{2}, SubtractOperatorToken{}, integer_token{2}}
 	actual := Tokenize(data)
 
 	for i := 0; i < len(expected); i++ {
