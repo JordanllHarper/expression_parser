@@ -23,10 +23,10 @@ type IntegerToken struct{ int }
 
 //
 
-// Base token
-type token interface{}
+// Base Token
+type Token interface{}
 
-func integer_or_error(index int, runes []rune) (token, int, error) {
+func integer_or_error(index int, runes []rune) (Token, int, error) {
 	integer_accumulator := []rune{}
 	for unicode.IsDigit(runes[index]) {
 		integer_accumulator = append(integer_accumulator, runes[index])
@@ -46,7 +46,7 @@ func integer_or_error(index int, runes []rune) (token, int, error) {
 	}
 	return IntegerToken{parsed_int}, index, nil
 }
-func parenthesis_or_error(character rune) (token, error) {
+func parenthesis_or_error(character rune) (Token, error) {
 	switch character {
 	case '(':
 		return ParenOpeningToken{}, nil
@@ -57,7 +57,7 @@ func parenthesis_or_error(character rune) (token, error) {
 	return nil, errors.New("Not a parenthesis")
 
 }
-func operator_or_error(character rune) (token, error) {
+func operator_or_error(character rune) (Token, error) {
 
 	switch character {
 	case '+':
