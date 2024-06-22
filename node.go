@@ -1,10 +1,10 @@
-package expressionparser
+package main
 
-type Node interface{}
+type Node interface {
+}
 
 type ValueNode struct{ Token }
 
 type BranchingNode struct {
-	token    Token
 	children []Node
 }

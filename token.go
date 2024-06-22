@@ -1,4 +1,4 @@
-package expressionparser
+package main
 
 import (
 	"errors"
@@ -7,26 +7,54 @@ import (
 )
 
 // Token types
+type IntegerToken struct{ int }
+
+func (t IntegerToken) PrettyString() string {
+	return strconv.FormatInt(int64(t.int), 10)
+}
+
 type AddOperatorToken struct{}
+
+func (t AddOperatorToken) PrettyString() string {
+	return "+"
+}
 
 type SubtractOperatorToken struct{}
 
+func (t SubtractOperatorToken) PrettyString() string {
+	return "-"
+}
+
 type MultiplyOperatorToken struct{}
+
+func (t MultiplyOperatorToken) PrettyString() string {
+	return "*"
+}
 
 type DivideOperatorToken struct{}
 
+func (t DivideOperatorToken) PrettyString() string {
+	return "/"
+}
+
 type ParenOpeningToken struct{}
+
+func (t ParenOpeningToken) PrettyString() string {
+	return "("
+}
 
 type ParenClosingToken struct{}
 
-type IntegerToken struct{ int }
-
-//
+func (t ParenClosingToken) PrettyString() string {
+	return ")"
+}
 
 // Base Token
-type Token interface{}
+type Token interface {
+	PrettyString() string
+}
 
-func integer_or_error(index int, runes []rune) (Token, int, error) {
+func IntegerOrError(index int, runes []rune) (Token, int, error) {
 	integer_accumulator := []rune{}
 	for unicode.IsDigit(runes[index]) {
 		integer_accumulator = append(integer_accumulator, runes[index])
@@ -46,7 +74,7 @@ func integer_or_error(index int, runes []rune) (Token, int, error) {
 	}
 	return IntegerToken{parsed_int}, index, nil
 }
-func parenthesis_or_error(character rune) (Token, error) {
+func ParenthesisOrError(character rune) (Token, error) {
 	switch character {
 	case '(':
 		return ParenOpeningToken{}, nil
@@ -57,7 +85,7 @@ func parenthesis_or_error(character rune) (Token, error) {
 	return nil, errors.New("Not a parenthesis")
 
 }
-func operator_or_error(character rune) (Token, error) {
+func OperatorOrError(character rune) (Token, error) {
 
 	switch character {
 	case '+':
@@ -73,6 +101,8 @@ func operator_or_error(character rune) (Token, error) {
 		return DivideOperatorToken{}, nil
 	}
 
-	return 0, errors.New("Not an operator")
+	var t Token
+
+	return t, errors.New("Not an operator")
 
 }

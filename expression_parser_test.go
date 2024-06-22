@@ -1,4 +1,4 @@
-package expressionparser
+package main
 
 import (
 	"testing"
