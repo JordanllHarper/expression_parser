@@ -1,8 +1,8 @@
 package expressionparser
 
-func Tokenize(raw_expression string) []token {
+func Tokenize(raw_expression string) []Token {
 	runes := []rune(raw_expression)
-	tokens := []token{}
+	tokens := []Token{}
 
 	for i := 0; i < len(runes); {
 		token, new_index, err := integer_or_error(i, runes)

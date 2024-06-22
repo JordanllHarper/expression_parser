@@ -45,7 +45,7 @@ func TestTokenizingASingleOperator(t *testing.T) {
 
 func TestTokenizingBasicAddition(t *testing.T) {
 	data := "2 + 2"
-	expected := []token{IntegerToken{2}, AddOperatorToken{}, IntegerToken{2}}
+	expected := []Token{IntegerToken{2}, AddOperatorToken{}, IntegerToken{2}}
 	actual := Tokenize(data)
 
 	for i := 0; i < len(expected); i++ {
@@ -58,7 +58,7 @@ func TestTokenizingBasicAddition(t *testing.T) {
 
 func TestTokenizingBasicSubtraction(t *testing.T) {
 	data := "2 - 2"
-	expected := []token{IntegerToken{2}, SubtractOperatorToken{}, IntegerToken{2}}
+	expected := []Token{IntegerToken{2}, SubtractOperatorToken{}, IntegerToken{2}}
 	actual := Tokenize(data)
 
 	for i := 0; i < len(expected); i++ {
@@ -70,7 +70,7 @@ func TestTokenizingBasicSubtraction(t *testing.T) {
 
 func TestTokenizingBasicMultiplication(t *testing.T) {
 	data := "2 * 2"
-	expected := []token{IntegerToken{2}, MultiplyOperatorToken{}, IntegerToken{2}}
+	expected := []Token{IntegerToken{2}, MultiplyOperatorToken{}, IntegerToken{2}}
 	actual := Tokenize(data)
 
 	for i := 0; i < len(expected); i++ {
@@ -82,7 +82,7 @@ func TestTokenizingBasicMultiplication(t *testing.T) {
 
 func TestTokenizingBasicDivision(t *testing.T) {
 	data := "2 / 2"
-	expected := []token{IntegerToken{2}, DivideOperatorToken{}, IntegerToken{2}}
+	expected := []Token{IntegerToken{2}, DivideOperatorToken{}, IntegerToken{2}}
 	actual := Tokenize(data)
 
 	for i := 0; i < len(expected); i++ {
@@ -94,7 +94,7 @@ func TestTokenizingBasicDivision(t *testing.T) {
 
 func TestTokenizingBasicDivisionWithParenthesis(t *testing.T) {
 	data := "(2 / 2)"
-	expected := []token{ParenOpeningToken{}, IntegerToken{2}, DivideOperatorToken{}, IntegerToken{2}, ParenClosingToken{}}
+	expected := []Token{ParenOpeningToken{}, IntegerToken{2}, DivideOperatorToken{}, IntegerToken{2}, ParenClosingToken{}}
 	actual := Tokenize(data)
 
 	for i := 0; i < len(expected); i++ {
